@@ -6,4 +6,4 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
-    return render(request, "blog/home.html")
+    return render(request, "home.html")

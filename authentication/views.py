@@ -13,4 +13,4 @@ def signup_page(request):
             # auto-login user
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
-    return render(request, "authentication/signup.html", context={"form": form})
+    return render(request, "signup.html", context={"form": form})
