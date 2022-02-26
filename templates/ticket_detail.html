@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>{{ flux.title }}</h2>
+    <img src="{{ ticket.image.url }}">
+    <p>{{ ticket.description }}</p>
+    <p>Ecrit par {{ ticket.user.name }} à {{ ticket.time_created }}</p>
+
+{% endblock content %}
+
+
+
