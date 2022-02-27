@@ -3,11 +3,11 @@
 {% block content %}
 
     <h2>{{ flux.title }}</h2>
-    <img src="{{ image }}">
-    <p>{{ description }}</p>
-    <p>Ecrit par {{ author }} - {{ time }}</p>
+    <img src="{{ ticket.image.url }}">
+    <p>{{ ticket.description }}</p>
+    <p>Ecrit par {{ ticket.user }} - {{ ticket.time_created }}</p>
     <strong><h3>Critiques</h3></strong>
-    <a href="{% url 'add_review' ticket_id=id %}"><p>Ecrire une critique</p></a>
+    <a href="{% url 'add_review' ticket.id %}"><p>Ecrire une critique</p></a>
     {% for review in reviews %}
     <p>-----------------------</p>
     <strong><p>{{ review.rating }} ⭐ {{ review.headline }}</p></strong>

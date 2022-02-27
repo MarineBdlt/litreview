@@ -1,4 +1,5 @@
 from cmath import log
+from urllib.error import HTTPError
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -8,6 +9,7 @@ from itertools import chain
 
 from django.db.models import CharField, Value
 from django.shortcuts import render
+from urllib.error import HTTPError
 
 # Create your views here.
 
@@ -56,18 +58,9 @@ def ticket_detail(request, ticket_id):
         reverse=True,
     )
     context = {
-        "id": ticket.id,
-        "title": ticket.title,
-        "description": ticket.description,
-        "author": ticket.user,
-        "image": ticket.image.url,
-        "time": ticket.time_created,
+        "ticket": ticket,
         "reviews": reviews,
     }
-
-    # factoriser liste ?
-
-    # ticket_and_reviews = {}
     return render(request, "ticket_detail.html", context=context)
 
 
@@ -83,7 +76,7 @@ def add_ticket(request):
             # now we can save
             ticket.save()
             return redirect("home")
-    return render(request, "partials/add_ticket_snippet.html", context={"form": form})
+    return render(request, "add_ticket.html", context={"form": form})
 
 
 @login_required
@@ -101,36 +94,39 @@ def add_review(request):
     return render(request, "partials/add_review_snippet.html", context={"form": form})
 
 
-def add_ticket_and_review(request, ticket_id=0):
+def add_ticket_and_review(request, ticket_id):
     ticket_form = forms.TicketForm()
     review_form = forms.ReviewForm()
+    context = {}
+
+    try:
+        ticket = get_object_or_404(models.Ticket, id=ticket_id)
+        ticket_id = ticket.id
+        context.update({"post": ticket})
+    except:
+        if request.method == "POST":
+            if ticket_form.is_valid:
+                ticket = ticket_form.save(commit=False)
+                ticket.user = request.user
+                ticket.save()
+            context.update({"post": ticket})
 
     if request.method == "POST":
-        ticket_form = forms.TicketForm(request.POST)
-        review_form = forms.ReviewForm(request.POST, request.FILES)
-
-        if ticket_id != 0:
-            ticket = get_object_or_404(models.Ticket, id=ticket_id)
-            ticket_id == ticket.id
-
-        elif ticket_form.is_valid:
-            ticket = ticket_form.save(commit=False)
-            ticket.user = request.user
-            ticket.save()
-
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.ticket = ticket
             review.user = request.user
             review.save()
+        return redirect("home")
 
-            return redirect("home")
+    context.update(
+        {
+            "ticket_id": ticket_id,
+            "ticket_form": ticket_form,
+            "review_form": review_form,
+        }
+    )
 
-    context = {
-        "ticket_id": ticket_id,
-        "ticket_form": ticket_form,
-        "review_form": review_form,
-    }
     print(ticket_id)
 
     return render(request, "add_review.html", context=context)

@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
     {% if ticket_id == 0 %}
-    <h2>Résumé du livre - Article</h2>
-    <form method="post" enctype="multipart/form-data">
-        {{ ticket_form.as_p }}
-        {% csrf_token %}
-    </form>
+        <h2>Résumé du livre - Article</h2>
+        <form method="post" enctype="multipart/form-data">
+            {{ ticket_form.as_p }}
+            {% csrf_token %}
+        </form>
+    {% else %}
+        {% include 'partials/ticket_snippet.html' %}
     {% endif %}
     <h2>Critique</h2>
     <form method="post" enctype="multipart/form-data">
