@@ -3,11 +3,20 @@
 {% block content %}
 
     <h2>{{ flux.title }}</h2>
-    <img src="{{ ticket.image.url }}">
+    <img src="{{ image }}">
     <p>{{ ticket.description }}</p>
-    <p>Ecrit par {{ ticket.user.name }} à {{ ticket.time_created }}</p>
+    <p>Ecrit par {{ author }} - {{ time }}</p>
+    <strong><h3>Commentaires</h3></strong>
+    {% for review in reviews %}
+    <p>-----------------------</p>
+    <strong><p>{{ review.rating }} ⭐   {{ review.headline }}</p></strong>
+    <p>{{ review.body }}</p>
+    <strong><p>{{ review.user }}</strong></p><p>{{ review.time_created }}</p>
+    {% endfor %}
 
 {% endblock content %}
+
+
 
 
 

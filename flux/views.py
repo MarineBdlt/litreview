@@ -20,8 +20,24 @@ def home(request):
 
     return render(request, "home.html", context=context)
 
+
 @login_required
 def ticket_detail(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    return render(request, "ticket_detail.html", {"ticket":ticket})
+    print("ticket", ticket, ticket.title)
+    reviews = sorted(
+        models.Review.objects.filter(ticket=ticket),
+        key=lambda instance: instance.time_created,
+        reverse=True,
+    )
+    context = {
+        "title": ticket.title,
+        "description": ticket.description,
+        "author": ticket.user,
+        "image": ticket.image.url,
+        "time": ticket.time_created,
+        "reviews": reviews,
+    }
 
+    # ticket_and_reviews = {}
+    return render(request, "ticket_detail.html", context=context)
