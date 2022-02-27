@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if ticket_id == 0 %}
+    <h2>Résumé du livre - Article</h2>
+    <form method="post" enctype="multipart/form-data">
+        {{ ticket_form.as_p }}
+        {% csrf_token %}
+    </form>
+    {% endif %}
+    <h2>Critique</h2>
+    <form method="post" enctype="multipart/form-data">
+        {{ review_form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Publier</button>
+    </form>
+{% endblock content %}

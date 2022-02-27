@@ -1,0 +1,7 @@
+<p>----------------------------</p>
+<a href="{% url 'ticket_detail' post.id %}">
+<h3> {{ post.title }} </h3>
+<img src="{{ post.image.url }}"></a>
+<p>{{ post.description }}</p>
+<p>Ecrit par {{ post.user }} - {{ post.time_created }}</p>
+<p>Ecrire une critique</p>

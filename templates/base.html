@@ -4,7 +4,10 @@
     </head>
     <body>
         <h1>LITReview</h1>
-        <a href="{% url 'home'%}"><h2>Mon flux</h2></a>
+        <h2><a href="{% url 'home'%}">Mon flux</a>
+            <a href="{% url 'ticket_list'%}">Articles</a>
+            <a href="{% url 'add_ticket' %}">Écrire un article</a>
+            <a href="{% url 'add_review' ticket_id=0 %}">Écrire une critique</a></h2>
         {% block content %}{% endblock content %}
         {%  if user.is_authenticated %}
             <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>

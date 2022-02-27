@@ -58,8 +58,15 @@ urlpatterns = [
         PasswordChangeDoneView.as_view(template_name="password_change_done.html"),
         name="password_change_done",
     ),
+    path("ticket-list", flux.views.ticket_list, name="ticket_list"),
     path(
         "ticket-detail/<int:ticket_id>", flux.views.ticket_detail, name="ticket_detail"
+    ),
+    path("write-ticket", flux.views.add_ticket, name="add_ticket"),
+    path(
+        "write-review/<int:ticket_id>",
+        flux.views.add_ticket_and_review,
+        name="add_review",
     ),
 ]
 

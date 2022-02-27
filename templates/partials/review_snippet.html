@@ -1,0 +1,5 @@
+<p>----------------------------</p>
+<p>Critique de <a href="{% url 'ticket_detail' post.ticket.id %}">{{ post.ticket.title }}</a></p>
+<strong><p>{{ post.rating }} ⭐ {{ post.headline }}</p></strong>
+<p>{{ post.body }}</p>
+<strong><p>{{ post.user }} </strong> {{ post.time_created }}</p>

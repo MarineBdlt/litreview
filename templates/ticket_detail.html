@@ -4,15 +4,17 @@
 
     <h2>{{ flux.title }}</h2>
     <img src="{{ image }}">
-    <p>{{ ticket.description }}</p>
+    <p>{{ description }}</p>
     <p>Ecrit par {{ author }} - {{ time }}</p>
-    <strong><h3>Commentaires</h3></strong>
+    <strong><h3>Critiques</h3></strong>
+    <a href="{% url 'add_review' ticket_id=id %}"><p>Ecrire une critique</p></a>
     {% for review in reviews %}
     <p>-----------------------</p>
-    <strong><p>{{ review.rating }} ⭐   {{ review.headline }}</p></strong>
+    <strong><p>{{ review.rating }} ⭐ {{ review.headline }}</p></strong>
     <p>{{ review.body }}</p>
     <strong><p>{{ review.user }}</strong></p><p>{{ review.time_created }}</p>
     {% endfor %}
+
 
 {% endblock content %}
 
