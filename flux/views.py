@@ -126,7 +126,4 @@ def add_ticket_and_review(request, ticket_id):
             "review_form": review_form,
         }
     )
-
-    print(ticket_id)
-
     return render(request, "add_review.html", context=context)
