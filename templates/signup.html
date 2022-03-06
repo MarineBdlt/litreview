@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="title-register">Inscription</h2>
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+    <form class="form-register" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button class="btn btn-success m-0" type="submit" >S’inscrire</button>
+    </form>
+{% endblock content %}

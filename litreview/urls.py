@@ -68,6 +68,7 @@ urlpatterns = [
         flux.views.add_ticket_and_review,
         name="add_review",
     ),
+    path("review-added/", flux.views.review_added, name="review_added"),
 ]
 
 if settings.DEBUG:

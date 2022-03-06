@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h2>Article</h2>
-<form method="post" enctype="multipart/form-data">
+
+<h2 class="form-title">Article</h2>
+<form class="form-homemade" method="post" enctype="multipart/form-data">
     {{ form.as_p }}
     {% csrf_token %}
-    <button type="submit" >Publier</button>
+    <button class="btn btn-success m-0" type="submit" >Publier</button>
 </form>
+
 {% endblock content %}

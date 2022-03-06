@@ -2434,6 +2434,33 @@ progress {
   font-size: 0.8125rem;
 }
 
+.form-title {
+  display: block;
+  margin-bottom: 1em;
+  margin-left: 30%;
+}
+
+.form-homemade {
+  margin-left: 30%;
+  margin-bottom: 2em;
+}
+
+.margin-text {
+  margin-left: 13em;
+  margin-right: 1em;
+}
+
+.form-register {
+  margin-left: 13%;
+  margin-bottom: 2em;
+}
+
+.title-register {
+  margin-left: 13%;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
 .form-text {
   margin-top: 0.25rem;
   font-size: 0.875em;
@@ -5126,7 +5153,51 @@ textarea.form-control-lg {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  width: 100%;
+  margin-top: 1em;
+  height: 17em;
+  width: auto
+}
+
+#review-img {
+  min-width: 8em;
+  max-width: 8em;
+  margin: 1em;
+  height: auto;
+  border-top-left-radius: 0.7rem;
+  border-top-right-radius: 0.7rem;
+  border-bottom-right-radius: 0.7rem;
+  border-bottom-left-radius: 0.7rem;
+}
+
+#review-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 10em;
+}
+
+#ticket-card {
+  max-width: 22.5em;
+  height: auto;
+}
+
+#review-card {
+  width: 25em;
+  height: 30em;
+  padding: 1em;
+
+}
+#text-ticket {
+  max-height: 6.3em;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+
+#text-review {
+  max-height: 20.7em;
+  width: auto;
+  overflow: auto;
+  text-overflow: ellipsis;
 }
 
 .card-img,

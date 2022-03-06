@@ -31,7 +31,13 @@ def home(request):
     posts = sorted(
         chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
     )
-    return render(request, "home.html", context={"posts": posts})
+
+    paginator = Paginator(posts, 9)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj": page_obj}
+    return render(request, "home.html", context=context)
 
 
 @login_required
@@ -39,7 +45,7 @@ def ticket_list(request):
     tickets = models.Ticket.objects.all()
     tickets_ordered = tickets.order_by("-time_created")
 
-    paginator = Paginator(tickets, 6)
+    paginator = Paginator(tickets_ordered, 6)
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -117,7 +123,7 @@ def add_ticket_and_review(request, ticket_id):
             review.ticket = ticket
             review.user = request.user
             review.save()
-        return redirect("home")
+        return redirect("review_added")
 
     context.update(
         {
@@ -127,3 +133,7 @@ def add_ticket_and_review(request, ticket_id):
         }
     )
     return render(request, "add_review.html", context=context)
+
+
+def review_added(request):
+    return render(request, "review_added.html")

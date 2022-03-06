@@ -604,7 +604,7 @@ progress {
   background-color: #fff;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
 }
 
@@ -5129,7 +5129,7 @@ textarea.form-control-lg {
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  width: 100%;
+  width: 0%;
 }
 
 .card-img,
@@ -14940,7 +14940,7 @@ h1 > a:hover, h2 > a:hover, h3 > a:hover, h4 > a:hover, h5 > a:hover, h6 > a:hov
 }
 
 img {
-  max-width: 100%;
+  max-width: 30%;
   height: auto;
 }
 
