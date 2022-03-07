@@ -32,7 +32,7 @@ def home(request):
         chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
     )
 
-    paginator = Paginator(posts, 9)
+    paginator = Paginator(posts, 12)
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -111,6 +111,7 @@ def add_ticket_and_review(request, ticket_id):
         context.update({"post": ticket})
     except:
         if request.method == "POST":
+            ticket_form = forms.BlogForm(request.POST, request.FILES)
             if ticket_form.is_valid:
                 ticket = ticket_form.save(commit=False)
                 ticket.user = request.user
@@ -119,6 +120,7 @@ def add_ticket_and_review(request, ticket_id):
 
     if request.method == "POST":
         if review_form.is_valid():
+            review_form = forms.PhotoForm(request.POST, request.FILES)
             review = review_form.save(commit=False)
             review.ticket = ticket
             review.user = request.user

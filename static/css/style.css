@@ -2447,12 +2447,12 @@ progress {
 
 .margin-text {
   margin-left: 13em;
-  margin-right: 1em;
+  margin-right: 13em;
 }
 
 .form-register {
   margin-left: 13%;
-  margin-bottom: 2em;
+  margin-bottom: 13%;
 }
 
 .title-register {
@@ -5154,8 +5154,9 @@ textarea.form-control-lg {
 .card-img-top,
 .card-img-bottom {
   margin-top: 1em;
+  width: 24.5em;
   height: 17em;
-  width: auto
+  object-fit: contain;
 }
 
 #review-img {
@@ -5173,30 +5174,34 @@ textarea.form-control-lg {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 1em;
 }
 
 #ticket-card {
-  max-width: 22.5em;
+  padding: 1.5em;
+  max-width: 24.5em;
   height: auto;
 }
 
 #review-card {
   width: 25em;
   height: 30em;
-  padding: 1em;
+  padding: 1.5em;
 
 }
 #text-ticket {
   max-height: 6.3em;
   overflow: auto;
   text-overflow: ellipsis;
+  text-align: justify;
 }
 
 #text-review {
-  max-height: 21.3em;
+  max-height: 22.3em;
   width: auto;
   overflow: auto;
   text-overflow: ellipsis;
+  text-align: justify;
 }
 
 .card-img,
