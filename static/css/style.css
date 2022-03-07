@@ -660,7 +660,7 @@ progress {
 }
 @media (min-width: 1400px) {
   .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-    max-width: 1200px;
+    max-width: 1500px;
   }
 }
 .row {
@@ -5161,7 +5161,7 @@ textarea.form-control-lg {
 #review-img {
   min-width: 8em;
   max-width: 8em;
-  margin: 1em;
+  margin-right: 1em;
   height: auto;
   border-top-left-radius: 0.7rem;
   border-top-right-radius: 0.7rem;
@@ -5173,7 +5173,6 @@ textarea.form-control-lg {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  min-height: 10em;
 }
 
 #ticket-card {
@@ -5194,7 +5193,7 @@ textarea.form-control-lg {
 }
 
 #text-review {
-  max-height: 20.7em;
+  max-height: 21.3em;
   width: auto;
   overflow: auto;
   text-overflow: ellipsis;
