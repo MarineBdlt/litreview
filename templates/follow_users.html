@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Suivre des utilisateurs</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" >Confirmer</button>
-    </form>
-    <h2>Abonnés</h2>
-    {% for follower in followed_by %}
-    <p>{{ follower.username }}</p>
-    {% endfor %}
-    <h2>Abonnemments</h2>
-    {% for follower in following %}
-    <p>{{ follower.username }}</p>
-    {% endfor %}
+<div id="following-page">
+    <section id="following-form">
+        <h2 >Suivre des utilisateurs</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" >Confirmer</button>
+        </form>
+    </section>
+    <section id="following-info">
+        <div>
+        <h2>Abonnés</h2>
+            {% for user in followed_by %}
+                <p>{{ user.user.username }}</p>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>Abonnements</h2>
+            {% for user in following %}
+                <p>{{ user.followed_user.username }}</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
 {% endblock content %}

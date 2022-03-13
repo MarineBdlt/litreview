@@ -2410,6 +2410,26 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+#following-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 3em;
+}
+
+#following-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#following-form {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+}
+
 .form-label {
   margin-bottom: 0.5rem;
 }
