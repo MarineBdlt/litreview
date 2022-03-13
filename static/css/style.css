@@ -5114,6 +5114,8 @@ textarea.form-control-lg {
 
 .card-title {
   margin-bottom: 0.5rem;
+  color: black; 
+  border-color: black;  
 }
 
 .card-subtitle {
@@ -5196,31 +5198,45 @@ textarea.form-control-lg {
   flex-direction: row;
   justify-content: space-between;
   padding: 1em;
+  margin: 1em;
+}
+
+.bk-ticket {
+  z-index: -500;
+  padding: 1.5em;
+  max-width: 27.5em;
+  height: auto;
+  opacity: 90%;
+  border-radius: 0.7rem;
+  padding-left: 4em;
+  padding-right: 4em;
+  margin: 1em;
 }
 
 #ticket-card {
   padding: 1.5em;
   max-width: 27.5em;
   height: auto;
-  border: solid;
 }
 
 #review-card {
   width: 27.5em;
-  height: auto;
   padding: 1.5em;
-  border: solid;
-
+  background-image: url("../images/papier-decore-a3-rossler-papier-paperado-parchemin-bords-decoupes-250g.jpg");
+  opacity: 100%;
 }
 #text-ticket {
-  max-height: 6.3em;
+  max-height: 7.3em;
   overflow: auto;
   text-overflow: ellipsis;
   text-align: justify;
+  background-image: url("../images/Old_paper6.jpg");
+  padding: 1em;
+  border-radius: 0.7rem;
 }
 
 #text-review {
-  max-height: 22.3em;
+  max-height: 28.1em;
   width: auto;
   overflow: auto;
   text-overflow: ellipsis;
