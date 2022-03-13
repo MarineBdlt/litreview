@@ -2,20 +2,12 @@
 {% load static %}
 {% block content %}
 
-{% if ticket_id == 0 %}
-    <h2 class="form-title">Résumé du livre - Article</h2>
-    <form class="form-homemade" method="post" enctype="multipart/form-data">
-        {{ ticket_form.as_p }}
-        {% csrf_token %}
-    </form>
-{% else %}
-    {% include 'partials/ticket_snippet.html' %}
-{% endif %}
+<h2 class="margin-text">Résumé du livre - Article</h2>
+    <div class="margin-text">{% include 'partials/ticket_snippet.html' with post=instance %}</div>
 <h2 class="form-title">Critique</h2>
-<form class="form-homemade" method="post" enctype="multipart/form-data">
+<form class="form-homemade" method="post">
     {{ review_form.as_p }}
     {% csrf_token %}
     <button class="btn btn-success m-0" type="submit" >Publier</button>
-</form>
-    
+</form>   
 {% endblock content %}

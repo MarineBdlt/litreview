@@ -5,31 +5,21 @@
 
 
 <section class="position-relative">
+	<div class="mb-4">
+		<h2 class="m-0"><i class="bi bi-hourglass-top me-2"></i>Les temps forts du moment</h2>
+		<p>A vos plumes !</p>
+	</div>
 	<div class="container" data-sticky-container>
-			<!-- Main Post START -->
-				<!-- Title -->
-		<div class="mb-4">
-			<h2 class="m-0"><i class="bi bi-hourglass-top me-2"></i>Les temps forts du moment</h2>
-			<p>A vos plumes !</p>
-		</div>
 		<div class="row">
-			<!-- Card item START -->
 			{% for post in page_obj %}
 				{% if post.content_type == 'TICKET' %}
 					{% include 'partials/ticket_snippet.html' with blog=instance %}
 				{% elif post.content_type == 'REVIEW' %}
 					{% include 'partials/review_snippet.html' with blog=instance %}
-			<!-- Card item END -->
-			<!-- Card item START -->
-
 				{% endif %}
 			{% endfor %}
-					<!-- Card item END -->
-			<!-- Card item START -->
 		</div>
-</div>
-	<!-- Sidebar END -->	
-			<!-- Main Post END -->				
+</div>			
 </section>
 <span class="margin-text">x
     {% if page_obj.has_previous %}

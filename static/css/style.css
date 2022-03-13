@@ -5153,9 +5153,10 @@ textarea.form-control-lg {
 .card-img,
 .card-img-top,
 .card-img-bottom {
+  border-radius: 0.7rem;
   margin-top: 1em;
   width: 24.5em;
-  height: 17em;
+  height: 24em;
   object-fit: contain;
 }
 
@@ -5179,14 +5180,16 @@ textarea.form-control-lg {
 
 #ticket-card {
   padding: 1.5em;
-  max-width: 24.5em;
+  max-width: 27.5em;
   height: auto;
+  border: solid;
 }
 
 #review-card {
-  width: 25em;
-  height: 30em;
+  width: 27.5em;
+  height: auto;
   padding: 1.5em;
+  border: solid;
 
 }
 #text-ticket {
@@ -5512,8 +5515,8 @@ textarea.form-control-lg {
 
 .badge {
   display: inline-block;
-  padding: 0.35em 0.65em;
-  font-size: 0.85em;
+  padding: 0.35em 1.6em;
+  font-size: 1em;
   font-weight: 400;
   line-height: 1;
   color: #fff;
@@ -15049,6 +15052,7 @@ video {
 }
 
 section {
+  margin-left: 5em;
   padding-top: 3.5rem;
   padding-bottom: 2.8rem;
 }

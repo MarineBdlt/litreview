@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h2 class="form-title">Rédiger une critique</h2>
+    <form method="post" class="form-homemade" enctype="multipart/form-data">
+    <h4>Résumé du livre - Article</h4>
+        {{ ticket_form.as_p }}
+    <br><h4>Critique</h4>    
+        {{ review_form.as_p }}
+        {% csrf_token %}
+        <button class="btn btn-success m-0" type="submit" >Publier</button>
+    </form>
+{% endblock content %}
+

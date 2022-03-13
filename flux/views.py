@@ -77,9 +77,7 @@ def add_ticket(request):
         form = forms.TicketForm(request.POST, request.FILES)
         if form.is_valid():
             ticket = form.save(commit=False)
-            # set the uploader to the user before saving the model
             ticket.user = request.user
-            # now we can save
             ticket.save()
             return redirect("home")
     return render(request, "add_ticket.html", context={"form": form})
@@ -92,49 +90,52 @@ def add_review(request):
         form = forms.ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
-            # set the uploader to the user before saving the model
             review.user = request.user
-            # now we can save
             review.save()
             return redirect("home")
     return render(request, "partials/add_review_snippet.html", context={"form": form})
 
 
-def add_ticket_and_review(request, ticket_id):
-    ticket_form = forms.TicketForm()
+def add_review(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
     review_form = forms.ReviewForm()
-    context = {}
-
-    try:
-        ticket = get_object_or_404(models.Ticket, id=ticket_id)
-        ticket_id = ticket.id
-        context.update({"post": ticket})
-    except:
-        if request.method == "POST":
-            ticket_form = forms.BlogForm(request.POST, request.FILES)
-            if ticket_form.is_valid:
-                ticket = ticket_form.save(commit=False)
-                ticket.user = request.user
-                ticket.save()
-            context.update({"post": ticket})
 
     if request.method == "POST":
-        if review_form.is_valid():
-            review_form = forms.PhotoForm(request.POST, request.FILES)
-            review = review_form.save(commit=False)
-            review.ticket = ticket
-            review.user = request.user
-            review.save()
-        return redirect("review_added")
+        review = review_form.save(commit=False)
+        review.user = request.user
+        review.ticket = ticket
+        review.save()
+        return redirect("review_added.html")
 
-    context.update(
-        {
-            "ticket_id": ticket_id,
-            "ticket_form": ticket_form,
-            "review_form": review_form,
-        }
-    )
+    context = {
+        "instance": ticket,
+        "review_form": review_form,
+    }
     return render(request, "add_review.html", context=context)
+
+
+def add_ticket_and_review(request):
+    ticket_form = forms.TicketForm()
+    review_form = forms.ReviewForm()
+    if request.method == "POST":
+        ticket_form = forms.TicketForm(request.POST, request.FILES)
+        review_form = forms.ReviewForm(request.POST)
+        if all([review_form.is_valid, ticket_form.is_valid()]):
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            return redirect("review_added")
+
+    context = {
+        "ticket_form": ticket_form,
+        "review_form": review_form,
+    }
+    return render(request, "add_ticket_and_review.html", context=context)
 
 
 def review_added(request):

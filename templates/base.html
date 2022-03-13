@@ -64,11 +64,11 @@ Header START -->
 	
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link ps-0" href="{% url 'add_ticket' %}">Proposer un livre</a>
+						<a class="nav-link ps-0" href="{% url 'add_ticket' %}">Mon profil</a>
 					</li>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{% url 'add_review' ticket_id=0 %}">Publier une critique</a>
+						<a class="nav-link" href="{% url 'follow_users' %}">Suivre des utilisateurs</a>
 					</li>
 				</ul>
 			</div>
@@ -107,10 +107,10 @@ Header START -->
 			<div class="nav flex-nowrap align-items-center">
 				<!-- Nav Button -->
 				<div class="nav-item d-none d-md-block">
-					<a href="{% url 'add_ticket' %}" class="btn btn-sm btn-success mb-0 mx-2">Proposer un livre</a>
+					<a href="{% url 'add_ticket' %}" class="btn btn-sm btn-info mb-0 mx-2">Proposer un livre</a>
 				</div>
 				<div class="nav-item d-none d-md-block">
-					<a href="{% url 'add_review' ticket_id=0 %}" class="btn btn-sm btn-info mb-0 mx-2">Publier une critique</a>
+					<a href="{% url 'add_ticket_and_review' %}" class="btn btn-sm btn-warning mb-0 mx-2" style="color:white;">Soumettre une critique</a>
 				</div>
 			</div>
 			<!-- Nav right END -->

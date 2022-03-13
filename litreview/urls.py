@@ -65,10 +65,16 @@ urlpatterns = [
     path("write-ticket", flux.views.add_ticket, name="add_ticket"),
     path(
         "write-review/<int:ticket_id>",
-        flux.views.add_ticket_and_review,
+        flux.views.add_review,
         name="add_review",
     ),
+    path(
+        "write-ticket-and-review/",
+        flux.views.add_ticket_and_review,
+        name="add_ticket_and_review",
+    ),
     path("review-added/", flux.views.review_added, name="review_added"),
+    path("follow-users/", authentication.views.follow_users, name="follow_users"),
 ]
 
 if settings.DEBUG:
