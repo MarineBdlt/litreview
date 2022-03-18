@@ -69,7 +69,7 @@ To write new commands while the web server is running, open a new terminal windo
 
 {% filename %}Windows:{% endfilename %}
 
-(myvenv) C:\Users\Name\djangogirls> python manage.py createsuperuser
+(myvenv) C:\Users\LITReview> python manage.py createsuperuser
 
 When prompted, type your username (lowercase, no spaces), email address, and password. Don't worry that you can't see the password you're typing in – that's how it's supposed to be. Type it in and press enter to continue. The output should look like this (where the username and email should be your own ones):
 
