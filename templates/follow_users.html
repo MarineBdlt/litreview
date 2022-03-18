@@ -1,27 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div id="following-page">
-    <section id="following-form">
-        <h2 >Suivre des utilisateurs</h2>
-        <form method="post">
+    <section>
+        <h2 >Suivre des utilisateurs</h2><br>
+        <form method="post" id="following-form">
             {% csrf_token %}
             {{ form }}
-            <button type="submit" >Confirmer</button>
+            <button class="btn btn-success m-0" type="submit">Confirmer</button>
         </form>
     </section>
-    <section id="following-info">
-        <div>
-        <h2>Abonnés</h2>
-            {% for user in followed_by %}
-                <p>{{ user.user.username }}</p>
-            {% endfor %}
-        </div>
-        <div>
-            <h2>Abonnements</h2>
-            {% for user in following %}
-                <p>{{ user.followed_user.username }}</p>
-            {% endfor %}
-        </div>
+    <section>
+        <h2>Abonnements</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">{{ following|length }}</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Suivre</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for pair in following %}
+                    <tr>
+                        <td><img class="avatar-xs avatar-img rounded-circle" src="{% static 'images/avatar/01.jpg' %}" alt="avatar"></td>
+                        <td>{{ pair.followed_user.username }}</td>
+                        <td><a href="{% url 'unfollow_users' pair.followed_user.id %}"><p>Se désabonner</p></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </section>
-</div>
+    <section>
+      <h2>Abonnés</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">{{ followed_by|length }}</th>
+                <th scope="col">Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pair in followed_by %}
+                    <tr>
+                    <td><img class="avatar-xs avatar-img rounded-circle" src="{% static 'images/avatar/01.jpg' %}" alt="avatar"></td>
+                    <td>{{ pair.user.username }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+ </div>   
 {% endblock content %}

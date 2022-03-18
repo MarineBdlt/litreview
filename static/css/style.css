@@ -2414,8 +2414,10 @@ progress {
 #following-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 3em;
+  justify-content: space-around;
+  margin: 2em;
+  margin-left: 12em;
+  width: 70em;
 }
 
 #following-info {
@@ -2463,6 +2465,20 @@ progress {
 .form-homemade {
   margin-left: 30%;
   margin-bottom: 2em;
+}
+
+.ticket-detail-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ticket-detail-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: justify;
+  width: 32em;
 }
 
 .margin-text {
@@ -5182,6 +5198,10 @@ textarea.form-control-lg {
   object-fit: contain;
 }
 
+.section-posts {
+  background-image: "../images/Old_paper6.jpg";
+}
+
 #review-img {
   min-width: 8em;
   max-width: 8em;
@@ -5202,7 +5222,6 @@ textarea.form-control-lg {
 }
 
 .bk-ticket {
-  z-index: -500;
   padding: 1.5em;
   max-width: 27.5em;
   height: auto;
@@ -5226,11 +5245,11 @@ textarea.form-control-lg {
   opacity: 100%;
 }
 #text-ticket {
-  max-height: 7.3em;
+  max-height: 10.3em;
   overflow: auto;
   text-overflow: ellipsis;
   text-align: justify;
-  background-image: url("../images/Old_paper6.jpg");
+  /* background-image: url("../images/Old_paper6.jpg"); */
   padding: 1em;
   border-radius: 0.7rem;
 }

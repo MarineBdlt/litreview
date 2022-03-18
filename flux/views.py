@@ -3,11 +3,12 @@ from urllib.error import HTTPError
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from flux import models, forms
+from flux import forms, models as flux_models
+from authentication import models as auth_models
 from django.core.paginator import Paginator
 from itertools import chain
 
-from django.db.models import CharField, Value
+from django.db.models import CharField, Value, Q
 from django.shortcuts import render
 from urllib.error import HTTPError
 
@@ -16,20 +17,23 @@ from urllib.error import HTTPError
 
 @login_required
 def home(request):
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
+    relations = auth_models.UserFollow.objects.filter(user__exact=request.user)
 
-    # reviews = get_users_viewable_reviews(request.user)
-    # returns queryset of reviews
+    tickets = flux_models.Ticket.objects.filter(
+        Q(user__id__in=relations.values_list("followed_user"))
+        | Q(user__exact=request.user)
+    )
+    tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
+    reviews = flux_models.Review.objects.filter(
+        Q(user__id__in=relations.values_list("followed_user"))
+        | Q(user__exact=request.user)
+    )
     reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
 
-    # tickets = get_users_viewable_tickets(request.user)
-    # returns queryset of tickets
-    tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
-
-    # combine and sort the two types of posts
     posts = sorted(
-        chain(reviews, tickets), key=lambda post: post.time_created, reverse=True
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True,
     )
 
     paginator = Paginator(posts, 12)
@@ -41,8 +45,33 @@ def home(request):
 
 
 @login_required
+def profil(request):
+    tickets = flux_models.Ticket.objects.filter(user=request.user)
+    tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
+    reviews = flux_models.Review.objects.filter(user=request.user)
+    reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
+    profil = request.user
+
+    posts = sorted(
+        chain(reviews, tickets),
+        key=lambda post: post.time_created,
+        reverse=True,
+    )
+
+    paginator = Paginator(posts, 12)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get("page")
+    header = paginator.get_page(page_number)
+    context = {"page_obj": page_obj, "header": header, "profil": profil}
+    return render(request, "profil.html", context=context)
+
+
+@login_required
 def ticket_list(request):
-    tickets = models.Ticket.objects.all()
+    tickets = flux_models.Ticket.objects.all()
     tickets_ordered = tickets.order_by("-time_created")
 
     paginator = Paginator(tickets_ordered, 6)
@@ -56,13 +85,14 @@ def ticket_list(request):
 
 @login_required
 def ticket_detail(request, ticket_id):
-    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    ticket = get_object_or_404(flux_models.Ticket, id=ticket_id)
     print("ticket", ticket, ticket.title)
     reviews = sorted(
-        models.Review.objects.filter(ticket=ticket),
+        flux_models.Review.objects.filter(ticket=ticket),
         key=lambda instance: instance.time_created,
         reverse=True,
     )
+    print("REVIEWS", reviews)
     context = {
         "ticket": ticket,
         "reviews": reviews,
@@ -97,7 +127,7 @@ def add_review(request):
 
 
 def add_review(request, ticket_id):
-    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    ticket = get_object_or_404(flux_models.Ticket, id=ticket_id)
     review_form = forms.ReviewForm()
 
     if request.method == "POST":

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="position-relative">
+	<div class="mb-4">
+		<h2 class="m-0">Mon profil</h2>
+		<p>{{ profil.username }} </p>
+	</div>
+	<div class="container" data-sticky-container>
+        <div class="mb-4">
+            <h2 class="m-0"><i class="bi bi-hourglass-top me-2"></i>Mes récentes publications</h2>
+            <p>Publications</p>
+            <div class="row">
+                {% for post in header %}
+                    {% if post.content_type == 'TICKET' %}
+                        {% include 'partials/ticket_snippet.html' %}
+                    {% elif post.content_type == 'REVIEW' %}
+                        {% include 'partials/review_snippet.html'%}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br>	
+    <div class="container" class="section-posts" data-sticky-container>
+        <div class="mb-4">
+            <h2 class="m-0"><i class=""></i>Ma bibliothèque</h2>
+            <p>Livres proposés</p>
+            <div class="row">
+                {% for post in header %}
+                    {% if post.content_type == 'TICKET' %}
+                        {% include 'partials/ticket_snippet.html' %}
+                {% endif %}
+        {% endfor %}
+    </div>
+    <br>	
+    <div class="container" class="section-posts" data-sticky-container>
+        <div class="mb-4">
+            <h2 class="m-0"><i class=""></i>Mes critiques</h2>
+            <p>Critiques</p>
+            <div class="row">
+                {% for post in header %}
+                    {% if post.content_type == 'REVIEW' %}
+                        {% include 'partials/review_snippet.html'%}
+                    {% endif %}
+        {% endfor %}
+    </div>				
+</section>
+<span class="margin-text">x
+    {% if page_obj.has_previous %}
+        <a href="?page=1">« première</a>
+        <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
+    {% endif %}
+
+    <span>
+        Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+
+    </span>
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">suivante</a>
+        
+        <a href="?page={{ page_obj.paginator.num_pages }}">dernière »</a>
+    {% endif %}
+</span>
+
+{% endblock content %}

@@ -75,6 +75,16 @@ urlpatterns = [
     ),
     path("review-added/", flux.views.review_added, name="review_added"),
     path("follow-users/", authentication.views.follow_users, name="follow_users"),
+    path(
+        "unfollow-users/<int:user_id>",
+        authentication.views.unfollow_users,
+        name="unfollow_users",
+    ),
+    path(
+        "profil/",
+        flux.views.profil,
+        name="profil",
+    ),
 ]
 
 if settings.DEBUG:

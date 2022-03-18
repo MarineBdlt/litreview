@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="card-body px-0 pt-3">
-            <h4 class="card-title"><a href="{% url 'ticket_detail' post.id %}" class="btn-link text-reset fw-bold">{{ post.rating }} ⭐ {{ post.headline }}</a></h4>
+            <h4 class="card-title"><a href="{% url 'ticket_detail' post.ticket.id %}" class="btn-link text-reset fw-bold">{{ post.rating }} ⭐ {{ post.headline }}</a></h4>
             <p id="text-review" id="text-ticket">{{ post.body }}</p>
             <!-- Card info -->
             <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">

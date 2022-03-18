@@ -64,7 +64,7 @@ Header START -->
 	
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link ps-0" href="{% url 'add_ticket' %}">Mon profil</a>
+						<a class="nav-link ps-0" href="{% url 'profil' %}">Mon profil</a>
 					</li>
 					</li>
 					<li class="nav-item">
@@ -210,12 +210,12 @@ Footer END -->
 JS libraries, plugins and custom scripts -->
 
 <!-- Bootstrap JS -->
-<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
 <!-- Vendors -->
-<script src="assets/vendor/tiny-slider/tiny-slider.js"></script>
-<script src="assets/vendor/sticky-js/sticky.min.js"></script>
+<script src="{% static 'vendor/tiny-slider/tiny-slider.js' %}"></script>
+<script src="{% static 'vendor/sticky-js/sticky.min.js' %}"></script>
 
 <!-- Template Functions -->
-<script src="assets/js/functions.js"></script>
+<script src="{% static 'js/functions.js' %}"></script>
 </html>

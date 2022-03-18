@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="margin-text">
-    <h2 >{{ flux.title }}</h2>
-    <img src="{{ ticket.image.url }}">
-    <p>{{ ticket.description }}</p>
-    <p>Ecrit par {{ ticket.user }} - {{ ticket.time_created }}</p>
-    <strong><h3>Critiques</h3></strong>
-    <a href="{% url 'add_review' ticket.id %}"><p>Ecrire une critique</p></a>
-    {% for review in reviews %}
-    <p>-----------------------</p>
-    <strong><p>{{ review.rating }} ⭐ {{ review.headline }}</p></strong>
-    <p>{{ review.body }}</p>
-    <strong><p>{{ review.user }}</strong></p><p>{{ review.time_created }}</p>
-    {% endfor %}
+<section class="ticket-detail-page margin-text">
+    <div class="ticket-detail-section">
+        <strong><h3>Oeuvre littéraire</h3></strong>
+        <h2 >{{ flux.title }}</h2>
+        <img src="{{ ticket.image.url }}">
+        <p><br>{{ ticket.description }}</p>
+        <p>Ecrit par {{ ticket.user }} - {{ ticket.time_created }}</p>
+    </div>
+    <div class="ticket-detail-section">
+        <strong><h3>Critique</h3></strong>
+        {% if not reviews %}
+            <a href="{% url 'add_review' ticket.id %}"><p>Ecrire une critique</p></a>
+        {% endif %}
+        {% for review in reviews %}
+        <strong><p>{{ review.rating }} ⭐ {{ review.headline }}</p></strong>
+        <p class="review-text">{{ review.body }}</p>
+        <strong><p>{{ review.user }}</strong></p><p>{{ review.time_created }}</p>
+        {% endfor %}
+    </div>
 </section>
 {% endblock content %}
-
 
 
 

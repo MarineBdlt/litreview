@@ -33,11 +33,9 @@ def follow_users(request):
             if user_f:
                 user = request.user
                 models.UserFollow.objects.create(user=user, followed_user=user_f[0])
-            return redirect("home")
+            return redirect("follow_users")
     following = models.UserFollow.objects.filter(user=request.user)
     followed_by = models.UserFollow.objects.filter(followed_user=request.user)
-    print("following", following)
-    print("followed_by", followed_by)
     context = {
         "form": form,
         "following": following,
@@ -45,3 +43,17 @@ def follow_users(request):
     }
 
     return render(request, "follow_users.html", context=context)
+
+
+@login_required
+def unfollow_users(request, user_id):
+    user = get_user_model().objects.get(id__exact=user_id)
+    print("USER", user)
+    following = models.UserFollow.objects.get(
+        user__exact=request.user, followed_user__exact=user
+    )
+
+    if following:
+        following.delete()
+
+    return redirect("follow_users")
