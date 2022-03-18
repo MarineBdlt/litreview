@@ -49,8 +49,9 @@ $ pip install -r requirements.txt
 
 Write  the following line in the console to run the web server.
 ```
-python manage.py runserver 
+$ python manage.py runserver 
 ```
+You can find the app on django-host : http://127.0.0.1:8000/
 
 ## Django admin
 
