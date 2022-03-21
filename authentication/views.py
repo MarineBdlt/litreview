@@ -27,7 +27,8 @@ def follow_users(request):
             user_f = get_user_model().objects.filter(username__exact=followed_user)
             if user_f:
                 user = request.user
-                models.UserFollow.objects.create(user=user, followed_user=user_f[0])
+                models.UserFollow.objects.create(
+                    user=user, followed_user=user_f[0])
             return redirect("follow_users")
     following = models.UserFollow.objects.filter(user=request.user)
     followed_by = models.UserFollow.objects.filter(followed_user=request.user)

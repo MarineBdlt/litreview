@@ -25,7 +25,6 @@ def home(request):
 
     posts = sorted(
         chain(reviews, tickets),
-        key=lambda post: post.time_created,
         reverse=True,
     )
 

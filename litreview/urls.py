@@ -32,7 +32,9 @@ from django.contrib.auth.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("home/", flux.views.home, name="home"),
-    path("signup/", authentication.views.signup_page, name="signup"),
+    path("signup/",
+         authentication.views.signup_page,
+         name="signup"),
     path(
         "",
         LoginView.as_view(
@@ -55,14 +57,22 @@ urlpatterns = [
     ),
     path(
         "change-password-done/",
-        PasswordChangeDoneView.as_view(template_name="password_change_done.html"),
+        PasswordChangeDoneView.as_view(
+            template_name="password_change_done.html"
+        ),
         name="password_change_done",
     ),
-    path("ticket-list", flux.views.ticket_list, name="ticket_list"),
+    path("ticket-list",
+         flux.views.ticket_list,
+         name="ticket_list"),
     path(
-        "ticket-detail/<int:ticket_id>", flux.views.ticket_detail, name="ticket_detail"
+        "ticket-detail/<int:ticket_id>",
+        flux.views.ticket_detail,
+        name="ticket_detail"
     ),
-    path("write-ticket", flux.views.add_ticket, name="add_ticket"),
+    path("write-ticket",
+         flux.views.add_ticket,
+         name="add_ticket"),
     path(
         "write-review/<int:ticket_id>",
         flux.views.add_review,
@@ -73,8 +83,12 @@ urlpatterns = [
         flux.views.add_ticket_and_review,
         name="add_ticket_and_review",
     ),
-    path("review-added/", flux.views.review_added, name="review_added"),
-    path("follow-users/", authentication.views.follow_users, name="follow_users"),
+    path("review-added/",
+         flux.views.review_added,
+         name="review_added"),
+    path("follow-users/",
+         authentication.views.follow_users,
+         name="follow_users"),
     path(
         "unfollow-users/<int:user_id>",
         authentication.views.unfollow_users,
@@ -88,4 +102,5 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
