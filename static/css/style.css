@@ -2481,6 +2481,20 @@ progress {
   width: 32em;
 }
 
+.add-review-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.add-review-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: justify;
+  width: 32em;
+}
+
 .margin-text {
   margin-left: 13em;
   margin-right: 13em;

@@ -1,5 +1,3 @@
-from cmath import log
-from urllib.error import HTTPError
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -7,12 +5,7 @@ from flux import forms, models as flux_models
 from authentication import models as auth_models
 from django.core.paginator import Paginator
 from itertools import chain
-
 from django.db.models import CharField, Value, Q
-from django.shortcuts import render
-from urllib.error import HTTPError
-
-# Create your views here.
 
 
 @login_required
@@ -37,7 +30,6 @@ def home(request):
     )
 
     paginator = Paginator(posts, 12)
-    print(tickets)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {"page_obj": page_obj}
@@ -86,13 +78,11 @@ def ticket_list(request):
 @login_required
 def ticket_detail(request, ticket_id):
     ticket = get_object_or_404(flux_models.Ticket, id=ticket_id)
-    print("ticket", ticket, ticket.title)
     reviews = sorted(
         flux_models.Review.objects.filter(ticket=ticket),
         key=lambda instance: instance.time_created,
         reverse=True,
     )
-    print("REVIEWS", reviews)
     context = {
         "ticket": ticket,
         "reviews": reviews,
@@ -114,18 +104,6 @@ def add_ticket(request):
 
 
 @login_required
-def add_review(request):
-    form = forms.ReviewForm()
-    if request.method == "POST":
-        form = forms.ReviewForm(request.POST, request.FILES)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.save()
-            return redirect("home")
-    return render(request, "partials/add_review_snippet.html", context={"form": form})
-
-
 def add_review(request, ticket_id):
     ticket = get_object_or_404(flux_models.Ticket, id=ticket_id)
     review_form = forms.ReviewForm()
@@ -144,13 +122,14 @@ def add_review(request, ticket_id):
     return render(request, "add_review.html", context=context)
 
 
+@login_required
 def add_ticket_and_review(request):
     ticket_form = forms.TicketForm()
     review_form = forms.ReviewForm()
     if request.method == "POST":
         ticket_form = forms.TicketForm(request.POST, request.FILES)
         review_form = forms.ReviewForm(request.POST)
-        if all([review_form.is_valid, ticket_form.is_valid()]):
+        if all([review_form.is_valid(), ticket_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.save()

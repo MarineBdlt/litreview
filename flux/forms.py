@@ -24,12 +24,12 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             "rating": forms.RadioSelect(
                 choices=[
-                    (0, "1 Mauvais"),
-                    (1, "2 Plutôt mauvais"),
-                    (2, "Mitigé"),
-                    (3, "Bon"),
-                    (4, "Très bon"),
-                    (5, "Génial"),
+                    (0, "1 - Mauvais"),
+                    (1, "2 - Plutôt mauvais"),
+                    (2, "3 - Mitigé"),
+                    (3, "4 - Bon"),
+                    (4, "5 - Très bon"),
+                    (5, "6 - Génial"),
                 ]
             )
         }
