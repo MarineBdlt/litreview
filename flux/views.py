@@ -109,11 +109,14 @@ def add_review(request, ticket_id):
     review_form = forms.ReviewForm()
 
     if request.method == "POST":
+        review_form = forms.ReviewForm(request.POST)
         review = review_form.save(commit=False)
         review.user = request.user
         review.ticket = ticket
+        print(review.rating)
+        print(review.body)
         review.save()
-        return redirect("review_added.html")
+        return redirect("review_added")
 
     context = {
         "instance": ticket,
